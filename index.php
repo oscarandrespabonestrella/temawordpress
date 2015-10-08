@@ -435,6 +435,7 @@ get_header(); ?>
 	  </section>
 
 
+
 	  <div id="projetos" class="products-3">
 	    <section   class="products-list-section">
 	      <div class="container">
@@ -451,39 +452,60 @@ get_header(); ?>
 	                <div class="ui-group">
 	                  <div class="button-group " data-filter-group="tipo">
 	                    <a class="filters is-checked" data-filter="">Todos</a>
-	                    <a class="filters" data-filter=".concreto">Concreto</a>
-	                    <a class="filters" data-filter=".alvenaria">Alvenaria de estrutura</a>
+											<?php $querystr = "SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key='wpcf-categoria-1'  ORDER BY meta_value ASC";
+													$categoria1_names =  $wpdb->get_results($querystr, OBJECT);
+													 foreach ( $categoria1_names as $categoria1_name ){ ?>
+													   <a class="filters" data-filter=".<?php echo str_replace(' ','',$categoria1_name->meta_value); ?>"><?php echo $categoria1_name->meta_value; ?></a>
+													<?php } ?>
 	                  </div>
 	                </div>
 	              </div>
 
-								<section id="post-<?php the_ID(); ?>" <?php post_class(array('projetos', $slug)); ?>>
 
-								  <?php while ( have_posts() ) : the_post(); ?>
-
-								    <?php the_content(); ?>
-
-								  <?php endwhile; // end of the loop. ?>
-
-								</section><!-- #post-## -->
 
 	              <div id="secondfilter" class="ui-group">
 	                <div class="button-group" data-filter-group="predio">
 	                  <a class="filters filtro is-checked" data-filter="">Todos</a>
-	                  <a class="filters filtro" data-filter=".casas">casas</a>
-	                  <a class="filters filtro" data-filter=".residenciais">Edificios Residenciais</a>
-	                  <a class="filters filtro" data-filter=".comerciais">Edificios comerciais</a>
-	                  <a class="filters filtro" data-filter=".industriais">Projetos Industriais</a>
-	                  <a class="filters filtro" data-filter=".paalvenariaconcreto">Paalvenariaes de Concreto</a>
-	                  <a class="filters filtro" data-filter=".institucoes">Instituções de Ensino </a>
+										<?php $querystr = "SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key='wpcf-categoria-2'  ORDER BY meta_value ASC";
+												$categoria2_names =  $wpdb->get_results($querystr, OBJECT);
+												foreach ( $categoria2_names as $categoria2_name ){ ?>
+													<a class="filters" data-filter=".<?php echo str_replace(' ','',$categoria2_name->meta_value); ?>"><?php echo $categoria2_name->meta_value; ?></a>
+												<?php } ?>
 	                </div>
 	              </div>
 
-
-
 	            </div>
 
+
+
 	            <div class="grid">
+
+								<?php
+
+											$args = array( 'post_type' => 'projeto', 'posts_per_page' => 10 );
+											query_posts( $args );
+											while ( have_posts() ) : the_post();
+													$categoria1 = types_render_field('categoria-1', array('raw' => 'true'));
+													$categoria2 = types_render_field('categoria-2', array('raw' => 'true'));
+
+													?>
+											    <div class="product <?php echo str_replace(' ', '',$categoria1); echo ' '.str_replace(' ', '',$categoria2);?>">
+														<div class="img">
+						                  <img src="<?php echo types_render_field('imagem', array('raw' => 'true')); ?>">
+						                  <a href="products-single.html" class="view-more">Saiba mais</a>
+						                </div>
+														<div class="legend">
+						                  <h3><?php the_title();?></h3>
+															<h4><?php echo $categoria1?><br><?php echo $categoria2?></h4>
+						                </div>
+											    </div>
+
+
+								<?php	endwhile;	?>
+
+
+
+
 	              <div class="product  casas alvenaria">
 	                <div class="img">
 	                  <img src="assets/media/product3-1.png">
