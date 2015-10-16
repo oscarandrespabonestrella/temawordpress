@@ -9,7 +9,44 @@
  *
  * @link https://github.com/roots/sage/pull/1042
  */
+ add_filter('widget_text', 'do_shortcode');
+
  register_nav_menus( array(
  'menu-top' => 'Menu superior',
  'menu-bottom' => 'Menu inferior'
  ));
+
+ add_action('widgets_init','jplana_widgets_init');
+
+ function jplana_widgets_init(){
+     $args = array(
+         'name'          => 'Header Widget Zone',
+         'id'            => 'header-widget-zone',
+         'description'   => '',
+         'before_widget' => '',
+         'after_widget'  => '',
+         'before_title'  => '<p style="display:none">"',
+         'after_title'   => '</p>' );
+     register_sidebar($args);
+ }
+
+ add_action('widgets_init','footer_widgets_init');
+
+ function footer_widgets_init(){
+     $args = array(
+         'name'          => 'Footer Widget Zone',
+         'id'            => 'footer-widget-zone',
+         'description'   => '',
+         'before_widget' => '',
+         'after_widget'  => '',
+         'before_title'  => '<p style="display:none">"',
+         'after_title'   => '</p>' );
+     register_sidebar($args);
+ }
+
+ function print_menu_shortcode($atts, $content = null) {
+    extract(shortcode_atts(array( 'name' => null, ), $atts));
+    return wp_nav_menu( array( 'menu' => $name, 'echo' => false ) );
+}
+add_shortcode('menu', 'print_menu_shortcode');
+ ?>

@@ -20,44 +20,10 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3 padding-bottom">
-				<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.</p>
-				<br>
-				<p><strong>Email: <a href="mailto:ebicalho@ebicalho.com.br" title="">ebicalho@ebicalho.com.br</a><br>
-					Telefone:(31) 3227-0267</strong></p>
-				<br>
-				<p><strong>Nosso endereço:<br>
-						Av. Carandaí, 288 - Funcionários,<br>
-						Belo Horizonte - MG, 30130-060
-				</strong></p>
-			</div>
-			<div class="col-md-4 sitemap padding-bottom">
-				<legend>Site Map</legend>
-				<div class="row">
-					<div class="col-xs-12">
-						<?php wp_nav_menu(
-						 array(
-						 'container' => false,
-						 'items_wrap' => '<ul>%3$s</ul>',
-						 'theme_location' => 'menu-bottom'
-						 )); ?>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-5 padding-bottom">
-				<form action="" method="POST" accept-charset="utf-8" class="">
-					<legend>Newsletter</legend>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.</p>
-					<div class="row">
-						<div class="col-sm-8">
-							<input class="form-control" id="contactEmail" placeholder="Enter your email" type="email">
-						</div>
-						<div class="col-sm-4">
-							<button type="submit" class="btn btn-blue btn-squared btn-full-on-mobile">Enviar</button>
-						</div>
-					</div>
-				</form>
-			</div>
+			<?php if ( ! dynamic_sidebar( 'footer-widget-zone' ) ) {} ?>
+
+
+			
 		</div>
 	</div>
 </section>
