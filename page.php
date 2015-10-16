@@ -74,19 +74,10 @@ get_header(); ?>
 	    </a>
 	  </header>
 
-
-
 		<?php
-		if ( have_posts() ) while ( have_posts() )
-			{
-			the_post();
-			the_content();
-			}
+		// Start the loop.
+		the_content();
 		?>
-
-
-
-
 
 	  <div id="quemsomos" class="about-2">
 	  <section  class="common-section common-section-theme-text-img first-section" >
