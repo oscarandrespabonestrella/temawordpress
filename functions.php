@@ -15,7 +15,8 @@
  'menu-top' => 'Menu superior',
  'menu-bottom' => 'Menu inferior'
  ));
-
+add_theme_support( 'post-thumbnails' );
+add_image_size($name, $width, $height, $cropBoolean);
  add_action('widgets_init','jplana_widgets_init');
 
  function jplana_widgets_init(){

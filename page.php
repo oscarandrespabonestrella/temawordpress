@@ -164,32 +164,20 @@ get_header(); ?>
 
 	  <section id="areas" class="about about-topics">
 	    <div class="container">
+				<?php
+						query_posts('p=83');
+						while ( have_posts() ) : the_post();?>
+						<div class="services">
+			        <div class="row">
+			          <div class="col-md-12 text-center">
+			            <h3><?php the_title(); ?></h3>
+			          </div>
+			        </div>
+			      </div>
 
-	      <div class="services">
-	        <div class="row">
-	          <div class="col-md-12 text-center">
-	            <h3>Áreas de Atuação</h3>
-	          </div>
-	        </div>
-	      </div>
+						<?php the_content();?>
 
-	      <div class="row padding-top">
-	        <div class="col-sm-4 ">
-	          <img src="<?php bloginfo('template_url'); ?>/img/atuacao01.png" class="full-responsive" alt="">
-	          <h2>Alvenaria 01</h2>
-	          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in lacinia quam. Fusce quis nulla tincidunt, interdum magna vitae, viverra est. Nunc eu sodales.</p>
-	        </div>
-	        <div class="col-sm-4 ">
-	          <img src="<?php bloginfo('template_url'); ?>/img/atuacao02.png" class="full-responsive" alt="">
-	          <h2>Alvenaria 02</h2>
-	          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in lacinia quam. Fusce quis nulla tincidunt, interdum magna vitae, viverra est. Nunc eu sodales.</p>
-	        </div>
-	        <div class="col-sm-4 ">
-	          <img src="<?php bloginfo('template_url'); ?>/img/atuacao03.png" class="full-responsive" alt="">
-	          <h2>Alvenaria 03</h2>
-	          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in lacinia quam. Fusce quis nulla tincidunt, interdum magna vitae, viverra est. Nunc eu sodales.</p>
-	        </div>
-	      </div>
+						<?php endwhile;	?>      
 	    </div>
 	  </section>
 
@@ -307,7 +295,8 @@ get_header(); ?>
 													?>
 											    <div class="product <?php echo str_replace(' ', '',$categoria1); echo ' '.str_replace(' ', '',$categoria2);?>">
 														<div class="img">
-						                  <img src="<?php echo types_render_field('imagem', array('raw' => 'true')); ?>">
+						                  <img src="<?php echo types_render_field('imagem', array('url'=>'true' , 'size' => 'thumbnail')); ?>">
+
 						                  <a href="products-single.html" class="view-more">Saiba mais</a>
 						                </div>
 														<div class="legend">
@@ -337,18 +326,16 @@ get_header(); ?>
 	      </div>
 
 	      <div class="row">
-	        <div class="col-md-3 text-center">
-	          <img src="<?php bloginfo('template_url'); ?>/img/logo_estadao.png" alt="" width="60%"/>
-	        </div>
-	        <div class="col-md-3 text-center">
-	          <img src="<?php bloginfo('template_url'); ?>/img/logo_startse_portal.png" alt="" width="60%"/>
-	        </div>
-	        <div class="col-md-3 text-center">
-	          <img src="<?php bloginfo('template_url'); ?>/img/logo_estadao.png" alt="" width="60%"/>
-	        </div>
-	        <div class="col-md-3 text-center">
-	          <img src="<?php bloginfo('template_url'); ?>/img/logo_startse_portal.png" alt="" width="60%"/>
-	        </div>
+					<?php
+
+								$args = array( 'post_type' => 'link-na-midia', 'posts_per_page' => 4 );
+								query_posts( $args );
+								while ( have_posts() ) : the_post();?>
+										<div class="col-md-3 text-center">
+						          <a href="<?php echo types_render_field('link-da-midia', array('raw' => 'true'));?>" target="_blank"><img src="<?php echo types_render_field('imagem-midia', array('raw' => 'true'));?>" alt="" max-width="158px"/></a>
+						        </div>
+								<?php	endwhile;	?>
+
 	      </div>
 	    </div>
 	  </section>
@@ -362,13 +349,13 @@ get_header(); ?>
 	            <div class="row">
 	              <div class="col-md-12 text-center">
 	                <h3>Fale conosco</h3>
-	                <p>Lorem ipsum dolor sit amet.</p>
+	                <p></p>
 	              </div>
 	            </div>
 	        </div>
 					<?php if ( ! dynamic_sidebar( 'header-widget-zone' ) ) {} ?>
 
-						
+
 
 
 	      </div>

@@ -73,12 +73,18 @@
 				 'container' => false,
 				 'items_wrap' => '<ul id="nav" class="nav navbar-nav nav-pipe-style ">%3$s</ul>',
 				 'theme_location' => 'menu-top'
-				 )); ?>			
+				 )); ?>
 
 
         <ul class="nav navbar-nav social navbar-right">
-          <li><a href="http://facebook.com" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
-          <li><a href="http://facebook.com" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+          <?php
+          $args = array( 'post_type' => 'red-social', 'posts_per_page' => 6,'order'=>'ASC' );
+          query_posts( $args );
+          while ( have_posts() ) : the_post();?>
+              <li><a class="wee" href="<?php echo types_render_field('link-red-social', array('raw' => 'true')); ?>" target="_blank"><i class="fa fa-<?php the_title();?>-square"></i></a></li>
+
+            <?php	endwhile;	?>
+
         </ul>
       </div>
     </div>

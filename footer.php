@@ -23,7 +23,7 @@
 			<?php if ( ! dynamic_sidebar( 'footer-widget-zone' ) ) {} ?>
 
 
-			
+
 		</div>
 	</div>
 </section>
@@ -36,17 +36,24 @@
 			</div>
 			<div class="col-sm-4">
 				<ul class="list-inline links social-media-right">
-					<li><a href="http://twitter.com" target="_blank"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="http://facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="http://pinterest.com" target="_blank"><i class="fa fa-pinterest"></i></a></li>
-					<li><a href="http://linkedin.com" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-					<li><a href="http://google.com/+" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-					<li><a href="http://instagram.com" target="_blank"><i class="fa fa-instagram"></i></a></li>
-					<li><a href="http://xing.com" target="_blank"><i class="fa fa-xing"></i></a></li>
+
+					<?php
+					$args = array( 'post_type' => 'red-social', 'posts_per_page' => 6,'order'=>'ASC' );
+					query_posts( $args );
+					while ( have_posts() ) : the_post();?>
+							<li><a class="wee" href="<?php echo types_render_field('link-red-social', array('raw' => 'true')); ?>" target="_blank"><i class="fa fa-<?php the_title();?>-square"></i></a></li>
+
+						<?php	endwhile;	?>
+
 				</ul>
 			</div>
 		</div>
 	</div>
+	<div class="arrow">
+    <a href="#" class="hvr-float" data-scrollto="true" title="Subir">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
 </footer>
 <?php wp_footer(); ?>
 
